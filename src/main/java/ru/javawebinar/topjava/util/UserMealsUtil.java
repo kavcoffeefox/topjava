@@ -3,11 +3,11 @@ package ru.javawebinar.topjava.util;
 import ru.javawebinar.topjava.model.UserMeal;
 import ru.javawebinar.topjava.model.UserMealWithExcess;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.Month;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class UserMealsUtil {
     public static void main(String[] args) {
@@ -28,8 +28,29 @@ public class UserMealsUtil {
     }
 
     public static List<UserMealWithExcess> filteredByCycles(List<UserMeal> meals, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
-        // TODO return filtered list with excess. Implement by cycles
-        return null;
+        Map<LocalDate, Long> caloriesSumPerDay = new HashMap<>();
+        List<UserMealWithExcess> result = new ArrayList<>();
+        // Прохожу весь массив и подсчитываю сумму в Map -> O(n)
+        for (UserMeal meal: meals) {
+            if (TimeUtil.isBetweenHalfOpen(meal.getDateTime().toLocalTime(), startTime, endTime)){
+                caloriesSumPerDay.put(
+                        meal.getDateTime().toLocalDate(),
+                        caloriesSumPerDay.getOrDefault(meal.getDateTime().toLocalDate(), 0L) + meal.getCalories());
+            }
+        }
+        // Прохожу весь массив второй раз создавая DTO и устанавливая ей значение из Map -> O(n)
+        for (UserMeal meal: meals){
+            result.add(
+                    new UserMealWithExcess(
+                            meal.getDateTime(),
+                            meal.getDescription(),
+                            meal.getCalories(),
+                            caloriesSumPerDay.get(meal.getDateTime().toLocalDate()) > caloriesPerDay
+                    )
+            );
+        }
+        // Summary O(n)+O(n)=O(2n)=O(n)
+        return result;
     }
 
     public static List<UserMealWithExcess> filteredByStreams(List<UserMeal> meals, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
