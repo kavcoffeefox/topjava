@@ -3,6 +3,7 @@
 <html lang="ru">
 <head>
     <title>Edit</title>
+    <meta charset="UTF-8">
 </head>
 <body>
 <h3><a href="index.html">Home</a></h3>
@@ -14,10 +15,10 @@
     <label for="datetime">DateTime
         <input type="datetime-local" name="datetime" id="datetime" value="${meal.dateTime}">
     </label><br>
-    <label for="description">
+    <label for="description">Description
         <input type="text" name="description" id="description" value="${meal.description}">
     </label><br>
-    <label for="calories">
+    <label for="calories">Calories
         <input type="text" name="calories" id="calories" value="${meal.calories}">
     </label><br>
     <input type="submit" value="Save">
