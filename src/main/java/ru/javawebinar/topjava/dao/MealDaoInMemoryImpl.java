@@ -8,9 +8,9 @@ import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class MealDAOInMemoryImpl implements MealDAO {
+public class MealDaoInMemoryImpl implements MealDao {
     private static final AtomicInteger meal_id_generator = new AtomicInteger();
-    private static final MealDAOInMemoryImpl INSTANCE = new MealDAOInMemoryImpl();
+    private static final MealDaoInMemoryImpl INSTANCE = new MealDaoInMemoryImpl();
 
     private static final List<Meal> meals = new CopyOnWriteArrayList<>();
 
@@ -26,10 +26,10 @@ public class MealDAOInMemoryImpl implements MealDAO {
         ));
     }
 
-    public static MealDAOInMemoryImpl getInstance(){
+    public static MealDaoInMemoryImpl getInstance(){
         return INSTANCE;
     }
-    private MealDAOInMemoryImpl() {
+    private MealDaoInMemoryImpl() {
     }
 
     @Override

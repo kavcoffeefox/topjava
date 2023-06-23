@@ -1,7 +1,7 @@
 package ru.javawebinar.topjava.web;
 
-import ru.javawebinar.topjava.dao.MealDAO;
-import ru.javawebinar.topjava.dao.MealDAOInMemoryImpl;
+import ru.javawebinar.topjava.dao.MealDao;
+import ru.javawebinar.topjava.dao.MealDaoInMemoryImpl;
 import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.model.MealTo;
 
@@ -23,7 +23,7 @@ import static ru.javawebinar.topjava.util.MealsUtil.filteredByStreams;
 public class MealServlet extends HttpServlet {
     public static final String MEAL_FORM_JSP = "meal_form.jsp";
     public static final String MEALS_LIST = "meals.jsp";
-    private final MealDAO mealDAO = MealDAOInMemoryImpl.getInstance();
+    private final MealDao mealDAO = MealDaoInMemoryImpl.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
